@@ -1,0 +1,108 @@
+-- CREATE TABLE students (
+-- 	student_id INT AUTO_INCREMENT PRIMARY KEY,
+-- 	full_name VARCHAR(50) NOT NULL,
+-- 	email VARCHAR(100) UNIQUE,
+-- 	birth_date DATE,
+-- 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- 	);
+-- 
+-- ALTER TABLE students ADD phone VARCHAR(20);
+-- 
+-- ALTER TABLE students MODIFY COLUMN full_name VARCHAR(100);
+-- 
+-- -- DROP TABLE students;
+-- 
+-- INSERT INTO students (full_name, email, birth_date)
+-- 	VALUE ('김일','kim1@test.com','2026-02-12');
+-- 
+-- -- SELECT * FROM students;
+-- 
+-- INSERT INTO students (full_name, email)
+-- 	VALUE ('김이','kim2@test.com'),
+-- 	('김삼','kim3@test.com');
+-- 
+-- -- SELECT * FROM students;
+-- 
+-- UPDATE students SET birth_date = '1990-01-01'
+-- 	WHERE student_id = 2;
+-- 
+-- SELECT * FROM students;
+-- 
+-- UPDATE students SET phone = '010-6641-6252'
+-- 	WHERE student_id = 3;
+-- 
+-- SELECT * FROM students;
+-- 
+-- INSERT INTO students (full_name, email, phone)
+-- 	VALUE ('실수', 'mistake@test.com','010-1234-5678');
+-- DELETE FROM students WHERE student_id= 4;
+-- SELECT * FROM students;
+-- 
+-- 
+-- INSERT INTO students2 (full_name, email) VALUE ('박일', 'pack1@test.com');
+-- 
+-- INSERT INTO students2 (email) VALUE ('test@test.com');
+-- UPDATE students2 SET full_name='신원준', email='shin369577@gmail.com', birth_date='2003-06-13', phone='010-6641-6252' WHERE students2_id = 5;
+-- 
+-- SELECT * FROM students2;
+-- 
+-- CREATE TABLE courses (
+-- 	course_id INT AUTO_INCREMENT PRIMARY KEY,
+-- 	course_name VARCHAR(100) NOT NULL,
+-- 	professor VARCHAR(50),
+-- 	credits INT DEFAULT(3)
+-- 	);
+-- 
+-- CREATE TABLE enrollments (
+-- 	enrollments_id INT AUTO_INCREMENT PRIMARY KEY,
+-- 	student_id INT,
+-- 	course_id INT,
+-- 	enroll_date DATE
+-- 	);
+-- 
+-- INSERT INTO courses (course_name,professor,credits) VALUE ('데이터베이스기초','강교수',3),('자바프로그래밍','이교수',4),('웹디자인','박교수',2);
+-- INSERT INTO enrollments (student_id,course_id,enroll_date) VALUE (1, 1, '2026-02-01'),(1, 2, '2026-02-01'),(2, 1, '2026-02-02');
+
+-- SELECT * FROM students;
+-- SELECT * FROM courses;
+-- SELECT * FROM enrollments;
+-- 
+-- SELECT s.full_name, c.course_name, c.professor, e.enroll_date
+-- 	FROM enrollments e
+-- 	JOIN courses c
+-- 	ON e.course_id = c.course_id
+-- 	JOIN students s
+-- 	ON e.student_id = s.student_id
+-- 	WHERE s.full_name = '김일';
+
+-- INSERT INTO students (full_name,email,birth_date,phone) VALUE ('박지민','park@test.com','1995-05-05','010-5555-6666');
+-- INSERT INTO courses (course_name, professor) VALUE ('파이썬 프로그래밍','최교수');
+-- INSERT INTO enrollments (student_id, course_id) VALUE (4, 4);
+-- SELECT course_name FROM courses WHERE professor = '이교수';
+-- SELECT full_name, phone FROM students WHERE email LIKE '%test.com';
+-- SELECT s.full_name, e.enroll_date
+-- 	FROM enrollments e
+-- 	JOIN students s
+-- 	ON e.student_id = s.student_id
+-- 	JOIN courses c
+-- 	ON e.course_id = c.course_id
+-- 	WHERE c.course_name = '데이터베이스기초';
+
+-- UPDATE students SET phone = '010-1597-7533' WHERE full_name = '김이';
+-- 
+-- UPDATE courses SET professor = '김교수' WHERE course_name = '웹디자인';
+-- 
+-- UPDATE courses
+-- 	SET credits = credits + 1;
+-- 
+-- DELETE from students WHERE full_name = '김이';
+-- 
+-- DELETE
+-- 	FROM courses 
+-- 	WHERE course_id NOT IN (SELECT c.course_id FROM enrollments e JOIN courses c ON e.course_id = c.course_id GROUP BY e.course_id);
+-- 
+DELETE FROM students WHERE student_id = 3;
+
+SELECT * FROM students;
+SELECT * FROM courses;
+SELECT * FROM enrollments;

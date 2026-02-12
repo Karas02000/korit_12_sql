@@ -3,20 +3,20 @@
 -- SELECT * FROM products;
 -- SELECT * FROM staff;
 -- SELECT * FROM users;
-
+-- 
 -- SELECT u.username 
 -- 	FROM users u
 -- 		JOIN staff s ON u.id = s.user_id;
-
+-- 
 -- SELECT
 -- 	'Find' AS 'First',
 -- 	'Insight' AS 'Second',
 -- 	'with SQL' AS 'Third';
-	
+-- 	
 -- SELECT 28+891;
 -- SELECT 19*27;
 -- SELECT 37+ 172 AS 'Plus', 25*78 AS 'Times', 'I Love SQL!' AS 'Result';
-
+-- 
 -- SELECT *
 -- 	FROM users;
 -- SELECT id, phone, city
@@ -24,7 +24,7 @@
 -- 		WHERE is_marketing_agree = 1
 -- 			AND country = 'Korea'
 -- 				LIMIT 3;
-
+-- 
 -- SELECT *
 -- 	FROM orderdetails;
 -- SELECT *
@@ -32,41 +32,41 @@
 -- 		LIMIT 7;
 -- SELECT id, user_id, order_date
 -- 	FROM orders;
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE country = 'Korea';
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE country != 'Korea';
-	
+-- 	
 -- SELECT *
 -- 	FROM users
 -- 	WHERE country = 'Korea'
 -- 	AND id = 10;
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE  created_at >= '2010-12-01'
 -- 		AND created_at <= '2011-01-01';
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE country IN ('Korea', 'USA', 'UK');
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE country NOT IN ('Korea', 'USA', 'UK');
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE created_at = '';
-
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	WHERE created_at IS NOT NULL;
-
+-- 
 -- SELECT created_at, phone, city, country
 -- 	FROM users
 -- 	WHERE city = 'México D.F.';
@@ -88,8 +88,8 @@
 -- 	FROM orders
 -- 	WHERE order_date
 -- 	NOT BETWEEN '2015-07-01' AND '2015-10-31';
-
-
+-- 
+-- 
 -- SELECT *
 -- 	FROM users
 -- 	ORDER BY id ASC;
@@ -112,7 +112,7 @@
 -- SELECT *
 -- 	FROM users
 -- 	ORDER BY created_at DESC;
-	
+-- 	
 -- SELECT *
 -- 	FROM users
 -- 	ORDER BY 1 DESC;
@@ -124,13 +124,13 @@
 -- SELECT username, phone, city, country, id
 -- 	FROM users
 -- 	ORDER BY id ASC;	
-	
+-- 	
 -- SELECT city, id
 -- 	FROM users
 -- 	ORDER BY
 -- 		city	DESC,
 -- 		id		ASC;
-
+-- 
 -- SELECT *
 -- 	FROM products
 -- 	ORDER BY price ASC;
@@ -143,37 +143,122 @@
 -- 	FROM orderdetails
 -- 	ORDER BY product_id DESC,
 -- 		quantity ASC;
-
+-- 
 -- SELECT COUNT(*) FROM users;
-
+-- 
 -- SELECT COUNT(DISTINCT country) AS countries FROM users;
-
+-- 
 -- SELECT ROUND(AVG(price),2) AS avgPrice FROM products;
-
+-- 
 -- SELECT SUBSTR(created_at, 1, 10) AS 'day', SUBSTR(created_at, 1, 7) AS 'month', created_at
 -- 	FROM users;
 -- 
 -- SELECT LENGTH(username) AS len, username FROM users ORDER BY len ASC;
-
+-- 
 -- SELECT ROUND(SUM(price),2) AS '합계' FROM products;
 -- SELECT ROUND(SUM(price),2) AS '합계' FROM products WHERE id <= 30;
 -- SELECT COUNT(DISTINCT id) AS '유저수' FROM users WHERE SUBSTR(created_at, 1, 7) BETWEEN '2010-10' AND '2010-12';
 -- SELECT COUNT(DISTINCT id) AS '유저수' FROM users WHERE LENGTH(username) <= 17;
-
+-- 
 -- SELECT COUNT(DISTINCT id) FROM users WHERE country = 'Korea';
 -- SELECT COUNT(DISTINCT id) FROM users WHERE country = 'USA';
 -- SELECT COUNT(DISTINCT id) FROM users WHERE country IN ('Korea','USA');
-
-
--- SELECT country, COUNT(DISTINCT id) AS '나라별 유저 수' FROM users GROUP BY country;
+-- 
+-- 
+-- SELECT country, COUNT(DISTINCT id) AS '나라별 유저 수' FROM users GROUP BY country;	
 -- 
 -- SELECT COUNT(DISTINCT country) FROM users;
+-- 
+-- SELECT COUNT(DISTINCT id) FROM users WHERE country = 'Korea' AND is_marketing_agree = 1;
+-- 
+-- 
+-- SELECT COUNT(DISTINCT id) FROM users WHERE country = 'UK' AND is_marketing_agree = 1;
+-- 
+-- SELECT country, is_marketing_agree, COUNT(DISTINCT id) AS '동의 사용자'
+-- 	FROM users
+-- 	GROUP BY country, is_marketing_agree
+-- 	ORDER BY country ASC, is_marketing_agree DESC;
+-- 
+-- SELECT COUNT(DISTINCT id) AS uniqueUserCnt
+-- 	FROM users
+-- 	WHERE country = 'Korea'
+-- 	AND is_marketing_agree = 1;
+-- 
+-- SELECT country AS 국가명, city AS 도시명, COUNT(DISTINCT id) AS 회원수
+-- 	FROM users
+-- 	GROUP BY city
+-- 	ORDER BY country ASC,
+-- 	COUNT(DISTINCT id) DESC;
+-- 	
+-- SELECT SUBSTR(created_at,1,7), COUNT(DISTINCT id)
+-- 	FROM users
+-- 	GROUP BY SUBSTR(created_at,1,7)
+-- 	ORDER BY SUBSTR(created_at,1,7) DESC;
+-- 
+-- SELECT product_id AS 제품ID, quantity AS 주문건수 FROM orderdetails
+-- 	GROUP BY product_id
+-- 	ORDER BY quantity DESC;
+-- 
+-- SELECT staff_id AS 직원ID, user_id AS 고객ID, COUNT(user_id) AS 주문건수
+-- 	FROM orders
+-- 	GROUP BY staff_id, user_id
+-- 	ORDER BY staff_id ASC,
+-- 	COUNT(user_id) DESC;
+-- 	
+-- SELECT SUBSTR(order_date, 1, 7) AS 년월, COUNT(SUBSTR(order_date, 1, 7)) AS 주문건수
+-- 	FROM orders
+-- 	GROUP BY SUBSTR(order_date, 1, 7)
+-- 	ORDER BY SUBSTR(order_date, 1, 7) DESC;
+-- 
+-- SELECT staff_id AS 직원ID,
+-- 	COUNT(staff_id) AS 주문건수,
+-- 	COUNT(DISTINCT user_id) AS 주문회원수
+-- 	FROM orders
+-- 	GROUP BY staff_id
+-- 	HAVING COUNT(staff_id) BETWEEN 10 AND 40
+-- 	ORDER BY 주문건수 DESC;
+-- 
+-- SELECT user_id, COUNT(user_id) AS 주문건수
+-- 	FROM orders
+-- 	GROUP BY user_id
+-- 	HAVING 주문건수 > 6
+-- 	ORDER BY 주문건수 DESC;
+-- 
+-- SELECT country AS 국가, COUNT(DISTINCT city) AS 도시수, COUNT(DISTINCT id) AS 회원수
+-- 	FROM users
+-- 	GROUP BY country
+-- 	HAVING COUNT(DISTINCT id) > 2
+-- 	ORDER BY 회원수 DESC;
+-- 
+-- SELECT country AS 국가, COUNT(DISTINCT city) AS 도시수, COUNT(DISTINCT id) AS 회원수
+-- 	FROM users
+-- 	WHERE country IS IN ('USA','Korea','Brazil','Argentina','Mexico')
+-- 	GROUP BY country, 
+-- 	HAVING 회원수 > 4
+-- 	ORDER BY 회원수 DESC;
 
-SELECT COUNT(DISTINCT id) FROM users WHERE country = 'Korea' AND is_marketing_agree = 1;
+-- SELECT *
+-- 	FROM users u
+-- 	JOIN orders o
+-- 	ON u.id=user_id
+-- 	ORDER BY u.id ASC;
+-- 	
+-- SELECT u.id AS 유저아이디, u.username, u.created_at, u.is_marketing_agree
+-- 	FROM users u
+-- 	LEFT JOIN orders o
+-- 	ON u.id=user_id;
 
-SELECT COUNT(DISTINCT id) FROM users WHERE country = 'UK' AND is_marketing_agree = 1;
 
-SELECT country, is_marketing_agree, COUNT(DISTINCT id) AS '동의 사용자'
-	FROM users
-	GROUP BY country, is_marketing_agree
-	ORDER BY country ASC, is_marketing_agree DESC;
+SELECT u.id, u.username, u.phone, d.order_id, d.product_id
+	FROM users u
+	LEFT JOIN orders o
+	ON u.id = o.user_id
+	INNER JOIN orderdetails d
+	ON u.id= d.id
+	;
+	
+	
+SELECT *
+	FROM users u
+	RIGHT JOIN orders o
+	ON u.id = o.user_id
